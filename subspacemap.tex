@@ -1,0 +1,151 @@
+% $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
+
+%\documentclass{vgtc}                          % final (conference style)
+\documentclass[review]{vgtc}                 % review
+%\documentclass[widereview]{vgtc}             % wide-spaced review
+%\documentclass[preprint]{vgtc}               % preprint
+%\documentclass[electronic]{vgtc}             % electronic version
+% \let\ifpdf\relax
+
+%% Uncomment one of the lines above depending on where your paper is
+%% in the conference process. ``review'' and ``widereview'' are for review
+%% submission, ``preprint'' is for pre-publication, and the final version
+%% doesn't use a specific qualifier. Further, ``electronic'' includes
+%% hyperreferences for more convenient online viewing.
+
+%% Please use one of the ``review'' options in combination with the
+%% assigned online id (see below) ONLY if your paper uses a double blind
+%% review process. Some conferences, like IEEE Vis and InfoVis, have NOT
+%% in the past.
+
+%% Please note that the use of figures other than the optional teaser is not permitted on the first page
+%% of the journal version.  Figures should begin on the second page and be
+%% in CMYK or Grey scale format, otherwise, colour shifting may occur
+%% during the printing process.  Papers submitted with figures other than the optional teaser on the
+%% first page will be refused.
+
+%% These three lines bring in essential packages: ``mathptmx'' for Type 1
+%% typefaces, ``graphicx'' for inclusion of EPS figures. and ``times''
+%% for proper handling of the times font family.
+
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{subfigure}
+
+%% We encourage the use of mathptmx for consistent usage of times font
+%% throughout the proceedings. However, if you encounter conflicts
+%% with other math-related packages, you may want to disable it.
+
+%% If you are submitting a paper to a conference for review with a double
+%% blind reviewing process, please replace the value ``0'' below with your
+%% OnlineID. Otherwise, you may safely leave it at ``0''.
+\onlineid{0}
+
+%% We encourage the use of mathptmx for consistent usage of times font
+%% throughout the proceedings. However, if you encounter conflicts
+%% with other math-related packages, you may want to disable it.
+
+%% This turns references into clickable hyperlinks.
+%% If you are submitting a paper to a conference for review with a double
+%% blind reviewing process, please replace the value ``0'' below with your
+%% OnlineID. Otherwise, you may safely leave it at ``0''.
+\onlineid{0}
+\newcommand{\note}[1]{\iffalse #1 \fi}
+\newcommand{\col}[1]{{\color{black}{#1}}}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+%% declare the category of your paper, only shown in review mode
+\vgtccategory{Research}
+
+%% allow for this line if you want the electronic option to work properly
+\vgtcinsertpkg
+
+%% In preprint mode you may define your own headline.
+%\preprinttext{To appear in an IEEE VGTC sponsored conference.}
+
+%% Paper title.
+
+\title{Subspace Map: Visualizing and Exploring Subspace Data in a Geographic Map}
+
+%% This is how authors are specified in the journal style
+
+%% indicate IEEE Member or Student Member in form indicated below
+\author{Chufan Lai\textsuperscript{1}\thanks{e-mail: chufan.lai@pku.edu.cn} %
+\and Xiaoru Yuan\textsuperscript{1, 2}\thanks{e-mail: xiaoru.yuan@pku.edu.cn}}
+
+
+\affiliation{\scriptsize
+ 1) Key Laboratory of Machine Perception (Ministry of Education), and School of EECS, Peking University\\
+ 2) Beijing Engineering Technology Research Center of Virtual Simulation and Visualization, Peking University}
+
+%other entries to be set up for journal
+%% \shortauthortitle{Biv \MakeLowercase{\textit{et al.}}: Global Illumination for Fun and Profit}
+%\shortauthortitle{Firstauthor \MakeLowercase{\textit{et al.}}: Paper Title}
+
+%% Abstract section.
+\abstract{
+When faced with a high-dimensional dataset, analysts often focus on a subset of the dimensions, which is known as a subspace. However, the analysis of subspace data is extremely complicated. On the one hand, the subspaces grow exponentially as the dimensionality increases. It's impossible to check on each one of them. On the other hand, data distributions could be highly different across various subspaces. it's a tough task to compare them and understand the impacts of dimension selection to the final data structures.
+In this paper, we propose Subspace Map, a novel visualization using the map metaphor to summarize the features of subspaces and guide users in the exploration. To be specific, we sample the subspaces and regard them as 'cities'. Multiple cities are clustered into higher-level regions based on their data similarities. For each region/cluster, we extract its featured dimensions and stable structures to reflect the impacts of dimension combinations to the data distribution. On different clustering levels, we pick out the representative subspaces as 'capitals' and build up a traffic system between them to guide users in the tour. Case studies with real-world datasets are carried out to prove the effectiveness of our Subspace Map system.
+} % end of abstract
+
+%% Keywords that describe your work. Will show as 'Index Terms' in journal
+%% please capitalize first letter and insert punctuation after last keyword
+\keywords{High-Dimensional Data Analysis, Subspace Exploration, Map Metaphor}
+
+%% ACM Computing Classification System (CCS).
+%% See <http://www.acm.org/class/1998/> for details.
+%% The ``\CCScat'' command takes four arguments.
+% \note{
+% \CCScatlist{ % not used in journal version
+%  \CCScat{K.6.1}{Management of Computing and Information Systems}%
+% {Project and People Management}{Life Cycle};
+%  \CCScat{K.7.m}{The Computing Profession}{Miscellaneous}{Ethics}
+% }
+% }
+
+%% Uncomment below to include a teaser figure.
+
+%% Uncomment below to disable the manuscript note
+%\renewcommand{\manuscriptnotetxt}{}
+
+%% Copyright space is enabled by default as required by guidelines.
+%% It is disabled by the 'review' option or via the following command:
+% \nocopyrightspace
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%% The ``\maketitle'' command must be the first command after the
+%% ``\begin{document}'' command. It prepares and prints the title block.
+
+%% the only exception to this rule is the \firstsection command
+
+%% \section{Introduction} %for journal use above \firstsection{..} instead
+\input{Sections/introduction.tex}
+\input{Sections/relatedwork.tex}
+\input{Sections/overview.tex}
+\input{Sections/method.tex}
+\input{Sections/casestudy.tex}
+\input{Sections/discussion.tex}
+\input{Sections/conclusion.tex}
+
+%% if specified like this the section will be committed in review mode
+\acknowledgments{
+}
+
+\bibliographystyle{abbrv}
+%%use following if all content of bibtex file should be shown
+%\nocite{*}
+\bibliography{subspacemap}
+\end{document}

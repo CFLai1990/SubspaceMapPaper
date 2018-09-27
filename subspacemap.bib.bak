@@ -1,0 +1,19 @@
+% Encoding: UTF-8
+
+@Article{fodor2002survey,
+  author  = {Fodor, Imola K},
+  title   = {A survey of dimension reduction techniques},
+  journal = {Center for Applied Scientific Computing, Lawrence Livermore National Laboratory},
+  year    = {2002},
+  volume  = {9},
+  pages   = {1--18},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
+
+@Comment{jabref-meta: groupstree:
+0 AllEntriesGroup:;
+1 ExplicitGroup:Local Data Analysis\;0\;;
+1 ExplicitGroup:Interactive Projection Analysis\;0\;;
+1 ExplicitGroup:Dimension-Reduced Projection\;0\;;
+}

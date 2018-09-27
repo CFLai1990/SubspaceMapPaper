@@ -1,0 +1,23 @@
+\firstsection{Introduction}
+\maketitle
+
+%Paragraph 1:   what is a subspace and why we are interested in its analysis
+High-dimensional data is featured by the existence of multiple attributes to describe the same data object. However, some of the attributes may not be as informative as the others. What's worse, these redundant attributes may bury deep some important data structures and relationships. For example, when analyzing the connection between education level and income, the physical attributes of a person (such as weight and height) are not very helpful. The more time we spend in studying the physical features, the less likely it is to reveal the information of interest. Therefore, experienced analysts usually pick out a small dimension subset that is most related to the current task before going deep into the details. The data space formed by these partial dimensions is called a \textbf{subspace}.
+
+%Paragraph 2:   clarify the notion of "subspace"
+In fact, subspaces can be divided into two types: axis-aligned and non-axis-aligned. Axes of the former are parallel to the original dimensions, while axes of the latter are weighted sums of the original ones. Linear dimension-reduced projections~\cite{fodor2002survey} are a typical class of non-axis-aligned subspaces. Some researchers also propose the notion of "data subspace"~\cite{DBLP:journals/tvcg/YuanRWG13}, which is a subset of data items. But in this paper, we only focus on the axis-aligned dimensional subspaces and refer to them as "subspaces" for short.
+
+%Paragraph 3:   what is so difficult about subspace analysis
+Subspace analysis could be extremely complicated due to three reasons. 
+\begin{enumerate} [1).]
+\item First, the exploration space is simply too huge. Choosing a subspace in an n-dimensional data is a combinatorial problem. There are altogether $2^{n}-1$ possible subspaces in different dimensionalities. It is impossible for automatic search to be successfully applied, not to mention manual analysis.
+\item Second, it's hard to compare the data in different dimension settings. Data structures could vary greatly across subspaces. Comparing them requires a common, accurate and reliable measurement that is irrelevant to the specific dimensions.
+\item Last but not least, it's difficult to understand and anticipate the impacts of dimension combinations to the data distributions. Analysts often choose dimensions merely based on their semantics. Including/Excluding a single dimension may seem like a subtle change, but it could cause the data structures to change dramatically. Some data patterns only appear when certain dimensions are combined. Without knowing about these complex interplays, it's difficult to find out a proper subspace with the desired data features.
+\end{enumerate}
+
+%Paragraph 4:   what have been done in the past to facilitate subspace analysis and what are the major defects
+
+
+%Paragraph 5:   what inspire this work and what are our goals
+%Paragraph 6:   what have been done in this work and what are the contributions
+%Paragraph 7:   the overall structure of this paper
