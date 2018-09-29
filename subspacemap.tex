@@ -73,7 +73,7 @@
 
 %% Paper title.
 
-\title{Subspace Map: a Geographic Map for Visualizing and Exploring Subspace Data}
+\title{S-Map: Subspace Map for High Dimensional Data Visualization}
 
 %% This is how authors are specified in the journal style
 
@@ -92,8 +92,12 @@
 
 %% Abstract section.
 \abstract{
+\note{
 When faced with a high-dimensional dataset, analysts often focus on a subset of the dimensions, which is known as a subspace. However, the analysis of subspace data is extremely complicated. On the one hand, the subspaces grow exponentially as the dimensionality increases. It's impossible to check on each one of them. On the other hand, data distributions could be highly different across various subspaces. it's a tough task to compare them and understand the impacts of dimension selection to the final data structures.
 In this paper, we propose Subspace Map, a novel visualization using the map metaphor to summarize the features of subspaces and guide users in the exploration. To be specific, we sample the subspaces and regard them as 'cities'. Multiple cities are clustered into higher-level regions based on their data similarities. For each region/cluster, we extract its featured dimensions and stable structures to reflect the impacts of dimension combinations to the data distribution. On different clustering levels, we pick out the representative subspaces as 'capitals' and build up a traffic system between them to guide users in the tour. Case studies with real-world datasets are carried out to prove the effectiveness of our Subspace Map system.
+}
+Analysis of subspaces of a complex high-dimensional dataset is extremely challenging, as the number of subspaces grows exponentially as the dimensionality increases and the data distributions could be highly different across various subspaces. 
+In this paper, we propose S-Map, e.g. Subspace Map, a novel visualization approach with the map metaphor to summarize the features of subspaces and guide users in efficient exploration. In S-Map, subspaces are clustered into continents or islands depends on their population and similarity. Representative subspaces are identified as cities on the map. Altitude of the lands reflects the density of the clusters. For each map region, we extract its featured dimensions and stable structures to reflect the impacts of dimension combinations to the data distribution. On different clustering levels, we pick out the representative subspaces as 'capitals' and build up a traffic system between them to guide users in the tour. Case studies with real-world datasets are presented to demonstrate the effectiveness of the proposed system.
 } % end of abstract
 
 %% Keywords that describe your work. Will show as 'Index Terms' in journal

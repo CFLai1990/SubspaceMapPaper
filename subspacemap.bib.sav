@@ -52,6 +52,28 @@
   url       = {https://doi.org/10.1109/VAST.2012.6400488},
 }
 
+@InProceedings{jackle2017pattern,
+  author    = {J{\"a}ckle, Dominik and Hund, Michael and Behrisch, Michael and Keim, Daniel A and Schreck, Tobias},
+  title     = {Pattern Trails: Visual Analysis of Pattern Transitions in Subspaces},
+  booktitle = {2017 IEEE Visualization Conference (VIS)},
+  year      = {2017},
+}
+
+@Article{DBLP:journals/spm/Vidal11,
+  author    = {Ren{\'{e}} Vidal},
+  title     = {Subspace Clustering},
+  journal   = {{IEEE} Signal Process. Mag.},
+  year      = {2011},
+  volume    = {28},
+  number    = {2},
+  pages     = {52--68},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  biburl    = {https://dblp.org/rec/bib/journals/spm/Vidal11},
+  doi       = {10.1109/MSP.2010.939739},
+  timestamp = {Fri, 26 May 2017 22:53:35 +0200},
+  url       = {https://doi.org/10.1109/MSP.2010.939739},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
 
 @Comment{jabref-meta: groupstree:
