@@ -8,16 +8,28 @@ High-dimensional data is featured by the existence of multiple attributes to des
 In fact, subspaces can be divided into two types: axis-aligned and non-axis-aligned. Axes of the former are parallel to the original dimensions, while axes of the latter are weighted sums of the original ones. Linear dimension-reduced projections~\cite{fodor2002survey} are a typical class of non-axis-aligned subspaces. Some researchers also propose the notion of "data subspace"~\cite{DBLP:journals/tvcg/YuanRWG13}, which is a subset of data items. But in this paper, we only focus on the axis-aligned dimensional subspaces. We refer to them as "subspaces" for short.
 
 %Paragraph 3:   what is so difficult about subspace analysis
-Subspace analysis could be extremely complicated due to three reasons. 
-\begin{enumerate} [1).]
+Subspace analysis could be extremely complicated due to three reasons:
+\begin{itemize} 
 \item First, the exploration space is simply too huge. Choosing a subspace in an n-dimensional data is a combinatorial problem. There are altogether $2^{n}-1$ possible subspaces in different dimensionalities. It is impossible for automatic search to be successfully applied, not to mention manual analysis.
 \item Second, it's hard to compare the data under different dimension settings. Data structures could vary greatly across subspaces. Comparing them requires a common, accurate and reliable measurement that is irrelevant to the specific dimensions.
-\item Last but not least, it's difficult to understand and anticipate the impacts of dimension combinations to the data distributions. Analysts often choose dimensions merely based on their semantics. Including/Excluding a single dimension may seem like a subtle change, but it could cause the data structures to change dramatically. Some data patterns only appear when certain dimensions are combined. Without knowing about these complex interplays, it's difficult to find out a proper subspace with the desired data features.
-\end{enumerate}
+\item Last but not least, it's difficult to understand and anticipate the impacts of dimension combinations on the data distributions. Analysts often choose dimensions merely based on their semantics. Including/Excluding a single dimension may seem like a subtle change, but it could cause the data structures to change dramatically. Some data patterns only appear when certain dimensions are combined. Without knowing about these complex interplays, it's difficult to find out a proper subspace with the desired data features.
+\end{itemize}
 
 %Paragraph 4:   what have been done in the past to facilitate subspace analysis and what are the major defects
-For many high-complexity problems (like the famous traveling salesman problem), heuristic algorithms are often adopted to provide feasible solutions. The subspace search is no exception. The corresponding algorithms are called Subspace Clustering~\cite{DBLP:journals/sigkdd/ParsonsHL04}~\cite{DBLP:journals/spm/Vidal11}, which aim to find out subspaces with valuable data clusters. However, such algorithms easily produce redundant results that are hard to handle by human analysts. Visualization systems~\cite{DBLP:conf/ieeevast/TatuMFBSSK12}~\cite{jackle2017pattern} are proposed to help organize and compare the redundant subspaces.
+For many high-complexity problems, heuristic algorithms are often adopted to provide feasible solutions. The subspace search is no exception. The corresponding algorithms are called Subspace Clustering~\cite{DBLP:journals/sigkdd/ParsonsHL04, DBLP:journals/spm/Vidal11}, which aim to find out subspaces with valuable data clusters. However, such algorithms easily produce redundant results that need to be further organized with the help of visualizations~\cite{DBLP:conf/ieeevast/TatuMFBSSK12, jackle2017pattern}. Besides, they only reach a small fraction of the possible subspaces and provide no guidance for dimension selection.
+There are also works aiming to facilitate users to explore the various subspaces. But they either rely on the inefficient manual tour planning~\cite{DBLP:journals/tvcg/ElmqvistDF08, DBLP:journals/tvcg/YuanRWG13}, or are not scalable enough for higher-dimensional subspaces~\cite{DBLP:conf/apvis/NhonW14}.
 
 %Paragraph 5:   what inspire this work and what are our goals
+To address the above challenges, we set three goal for this work:
+\begin{enumerate} [\textbf{Goal} 1:]
+\item Provide an overview of the enormous parameter space to inform users about all possible subspaces as well as their relationships.
+\item Reveal the impacts of dimension combinations on data distributions, in order to guide users in the selection of dimensions.
+\item Help users explore the numerous subspaces in an efficient and scalable way.
+\end{enumerate}
+In the design process, we found that these goals are highly similar to many of the cartographic tasks. Visualizing an unknown parameter space is just like producing a geographic map. Guiding users in the exploration requires the existence of a supportive traffic system. Inspired by that, we decided to take a cartographic perspective and come up with the idea of \textbf{S-Map}, which is short for \textbf{Subspace Map}.
+
 %Paragraph 6:   what have been done in this work and what are the contributions
+To be specific, we gather samples from the parameter space like building up cities in the wilderness. By comparing their data distributions, we are able to cluster similar cities into larger regions that are called states or countries. The clusters are regarded as plains and continents, while the outliers are seen as islands. Straits reflect the major differences between clusters, while altitudes show the subtle distinctions. To describe each cluster, we extract the featured dimensions and data structures that are shared by most cluster members. Hierarchical clustering is used to mitigate the scalability issue. In order to relieve the user's cognitive burden, we identify the representative subspaces as capital cities at each cluster level. Routes are built to connect the capitals and provide guidance for tour planning.
+
 %Paragraph 7:   the overall structure of this paper
+The remainder of this paper is structured as follows. In Section 2, we briefly review the literature regarding high-dimensional data visualization and subspace analysis. In Section 3, we derive the design considerations and give an overview of the S-Map approach, along with the metaphors it uses. The algorithm details and visual designs are elaborated in Section 4 and 5 respectively. In Section 6, we present the case studies to demonstrate the effectiveness of S-Map. Section 7 discusses the deficiencies at the current stage, as well as the future works. The final section concludes the whole paper.
