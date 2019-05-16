@@ -1,4 +1,51 @@
 \section{The Design of S-Map}
+In this section, we first introduce the design considerations of S-Map. Then we show the basic idea of the approach by demonstrating the metaphors we use when constructing such a fictional map. Meanwhile, we will explain how the design considerations are met.
+
 \subsection{Design Considerations}
-\subsection{S-Map: an Overview}
-\subsection{the Map Metaphors}
+In Section~\ref{sec:introduction}, three goals are set for this work. 
+
+Firstly, we aim to visualize the enormous parameter space of all possible subspaces (\textit{G1}). Given the simplicity of one-dimensional subspaces, we only consider subspaces with at least two dimensions in this work. With any n-dimensional dataset, there are altogether $2^n - n - 1$ possibilities, which easily outgrow the capability of any display screen when n increases. But still, users should be able to get the information of individual subspaces in the exploration. In order to cope with the scalability issue, we need to cut down the possibilities, as well as to fully utilize the display space.
+
+Cutting down the possibilities means to down-sample the subspaces to an acceptable scale, yet maintaining the representativeness of the samples (\textit{DC1}). To fully utilize the display space, we shall need a scalable way to visualize the large amount of subspace samples in a 2D screen (\textit{DC2}). That means 1D alignment~\cite{jackle2017pattern} will not suffice due to the lack of visual capacity. We don't consider 3D rendering either, due to the extra cognition and interaction costs. In addition, we hope to show the relationships among the subspaces in a way that is easy to perceive and understand (\textit{DC3}). Since such relationships are unlikely linear, a 2D layout is also more competent than a 1D alignment~\cite{jackle2017pattern}.
+
+As the second goal, we aim to reveal the interplay between dimension combinations and data structures (\textit{G2}). More specifically, we want to know which part of the data cause the subspaces to be similar/different, and which dimensions are responsible for it (\textit{DC4}). This is crucial to the selection of dimensions. In the analysis, users are often interested in a certain part of the data features, which can remain as long as the critical dimensions are maintained. It not only gives users the freedom to choose between alternative subspaces, but largely reduce the uncertainty of the enormous parameter space.
+
+Last but not least, we aim to help users explore the subspaces in an efficient and understandable way (\textit{G3}). To achieve efficiency, it's important to extract representative subspaces so that users can acquire the overview in a short time. This coincides with the first design consideration \textit{DC1}. But abrupt changes between highly different subspaces can easily lead to confusion. In order to keep things understandable, it's necessary to provide a more incremental schema where users can observe the gradual transition from one subspace to another (\textit{DC5}). Rolling-the-Dice by Elmqvist et al.~\cite{DBLP:journals/tvcg/ElmqvistDF08} is a typical case of such transition. It drafts a series of subtle animations between any two scatterplots, each of which alters only one dimension to reduce users' cognitive load. 
+
+To sum up, 5 design considerations are derived based on the predefined goals:
+\begin{enumerate} [\textbf{DC} 1:]
+\item The possible subspaces should be down-sampled to extract the representative ones.
+\item An efficient and scalable 2D layout is required to visualize the subspaces.
+\item The layout of subspaces should reflect their relationships in a way that is easy to perceive and understand.
+\item We need to reveal the critical data and dimensions that are responsible for the subspaces to be similar/different.
+\item An incremental exploration scheme is needed to help users understand the transitions between subspaces.
+\end{enumerate}
+
+In the design process, we tried various schemes for the final visualization. A major one is to render a 2D projection with each point being a subspace. Indeed, relationships can be shown intuitively (\textit{DC3}). But much empty space is left to reflect the distances, the accuracy of which may not be so important. It weakens the scalability of the layout (\textit{DC2}), not to mention the often occurred visual occlusion.
+
+Then we considered an alternative map-like layout where subspaces are shown as neighboring areas. We found that many of the cartographic concepts nicely meet the design requirements. It inspired us to fully embrace the notion of a geographic map, which eventually developed into Subspace Map (also called S-Map). Since the idea is built upon map metaphors, we first clarify the critical notions in this section, before introducing further algorithm or visualization details. 
+
+\subsection{The Map Metaphors}
+
+In S-Map, we treat the whole parameter space as an unknown \textbf{world}. It contains $2^n - n - 1$ pieces of \textbf{land}, each being a different subspace. We visualization designers are like cartographers, exploiters and tour guides. 
+
+\subsubsection{The Geography}
+
+As cartographers, we need to measure the topography and draw a map to depict it. Since it's a fictional world, there is no such thing as a "ground truth" about how the subspaces are arranged. Taking advantage of the Gestalt Principles~\cite{spelke1990principles}, we assume that similar subspaces are placed closely, in order to reduce users' perceptual burden (\textit{DC3}). It also coincides with our daily experience that nearby areas have similar scenes. Numerous pieces of lands can form a large \textbf{continent}. Features are relatively stable within each continent, just like the cold dry Antarctica, or the hot wet South America in the real world. \textbf{Oceans} don't have specific meanings, but they are important for dividing the various continents.
+
+We define \textbf{landscape} as the data structure in each subspace. It's usually what \textbf{tourists} (i.e. the users) concern the most. Dimensions are analogous to \textbf{natural factors}, which decide how the landscapes would look like. We want not only to compare the landscapes, but also to understand which factors are responsible for the differences and similarities (\textit{DC4}). 
+
+\subsubsection{Administrative Divisions}
+
+As exploiters, we should establish cities and set up administrative divisions. It's impossible and unnecessary for tourists to visit every piece of land on a continent. That's why we need a city to exhibit the features of its nearby areas. By "\textbf{city}", we refer to the subspace samples obtained via down-sampling (\textit{DC1}).
+But even with the sampling, there could still be too many cities to visit.
+
+Now recall the first time you experienced a new culture abroad. How did you get to know the ancient Chinese art or get a taste of the French romance? It's very unlikely you visited every city in China or France. You probably just paid a visit to Beijing or Paris. It explains the necessity for hierarchical \textbf{administrative divisions}, which are critical for a more scalable journey. Concepts like countries, states and provinces are used to describe the large clusters formed by similar subspaces. For each administrative region, a \textbf{capital city} is chosen to show its main characteristics.
+
+\subsubsection{Transportation}
+
+As tour guides, we have the responsibility to plan a reasonable route for any desired trip. \textbf{Flight routes} are efficient for long-distance journeys, through which tourists can easily travel between various countries. However, only some capital cities have airports with international flights. Besides, tourists may suffer from \textbf{jet lag} due to the swift environmental changes. It corresponds to the confusion caused by sudden visual changes when users try to switch between highly different subspaces.
+
+Trips through \textbf{land routes} and \textbf{sea routes}, on the other hand, are slower but more steady and comfortable. Land routes such as railways and bus routes are used to connect the neighboring cities on the same continent. Sea routes connect the port cities for transportations across continents. Both kinds of transportation allow the tourists to enjoy the scenery of the in-between cities. That makes it easier to accept the differences between the origin and the destination (\textit{DC5}).
+
+With all the map related concepts, we can now meet most design requirements except \textit{DC2}. In the following sections, we will introduce how we design S-Map to realize this map framework and visualize it with an efficient 2D layout (\textit{DC2}).
